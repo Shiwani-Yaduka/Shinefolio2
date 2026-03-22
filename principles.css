@@ -467,4 +467,32 @@
   .card:nth-child(n) {
     border-right: none;
   }
+
+  .cta {
+    padding: 60px 20px;
+    overflow-x: hidden;
+  }
+
+  .cta__title {
+    font-size: clamp(40px, 12vw, 56px);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+
+  .cta__ghost {
+    font-size: clamp(100px, 30vw, 140px);
+    white-space: normal;
+    width: 100%;
+    text-align: center;
+  }
+
+  .cta__kicker {
+    font-size: 10px;
+  }
+
+  .cta__btn {
+    font-size: 14px;
+    padding: 14px 32px;
+  }
 }
