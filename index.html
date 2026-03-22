@@ -1236,12 +1236,29 @@
     .terminal-body {
       padding: 1.5rem;
       font-family: 'DM Mono', monospace;
-      font-size: .8rem;
+      font-size: .85rem;
+      max-height: 420px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .terminal-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .terminal-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .terminal-body::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 3px;
     }
 
     .t-line {
       color: var(--terminal-text);
-      line-height: 2;
+      line-height: 1.9;
+      word-break: break-word;
     }
 
     .t-prompt {
@@ -1256,84 +1273,184 @@
       color: rgba(255, 255, 255, .6);
     }
 
-    .contact-form {
-      margin-top: 1.5rem;
+    .t-error {
+      color: #FF6B6B;
     }
 
-    .form-group {
-      margin-bottom: 1rem;
+    .t-success {
+      color: #28CA41;
     }
 
-    .form-label {
-      font-family: 'DM Mono', monospace;
-      font-size: .65rem;
-      color: var(--terminal-text);
-      display: block;
-      margin-bottom: .4rem;
-      letter-spacing: .1em;
+    .t-info {
+      color: #64C8FF;
     }
 
-    .form-input,
-    .form-textarea {
-      width: 100%;
-      background: rgba(255, 255, 255, .05);
-      border: 1px solid rgba(107, 0, 24, .4);
-      color: #F5F5F5;
-      font-family: 'DM Mono', monospace;
-      font-size: .8rem;
-      padding: .6rem .8rem;
-      outline: none;
-      transition: border-color .3s;
+    .t-accent {
+      color: #D4AF37;
     }
 
-    [data-theme="dark"] .form-input,
-    [data-theme="dark"] .form-textarea {
-      border-color: rgba(0, 255, 65, .3);
-    }
-
-    .form-input:focus,
-    .form-textarea:focus {
-      border-color: var(--terminal-text);
-    }
-
-    .form-textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .btn-send {
-      font-family: 'DM Mono', monospace;
-      font-size: .7rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: .7rem 1.8rem;
-      background: var(--accent);
-      color: #FAF9F6;
-      border: none;
+    .t-link {
+      color: #D4AF37;
       cursor: pointer;
-      transition: all .3s;
+      text-decoration: underline;
     }
 
-    .btn-send:hover {
-      background: var(--emerald);
+    .t-link:hover {
+      color: #fff;
     }
 
-    [data-theme="dark"] .btn-send {
-      color: #0A0A0A;
-      background: var(--terminal-text);
+    .terminal-input-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 0.5rem;
     }
 
-    [data-theme="dark"] .btn-send:hover {
-      background: var(--emerald);
-      color: #0A0A0A;
+    .terminal-input-line .t-prompt {
+      flex-shrink: 0;
     }
 
-    .form-status {
+    #terminalInput {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #64C8FF;
       font-family: 'DM Mono', monospace;
-      font-size: .7rem;
-      margin-top: .8rem;
-      color: var(--terminal-text);
-      display: none;
+      font-size: .85rem;
+      flex: 1;
+      caret-color: #64C8FF;
+      letter-spacing: .04em;
+      padding: 0;
+      margin: 0;
+    }
+
+    #terminalInput::placeholder {
+      color: rgba(100, 200, 255, 0.25);
+    }
+
+    .t-line.fade-in {
+      animation: termFadeIn 0.2s ease forwards;
+    }
+
+    @keyframes termFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── 3D PHOTO CAROUSEL ─────────────────────────────────────────────── */
+    #gallery {
+      overflow: visible;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    #gallery .section-header {
+      position: relative;
+      z-index: 5;
+    }
+
+    .gallery-carousel {
+      perspective: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 700px;
+      position: relative;
+      margin: 0 auto;
+      max-width: 100%;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
+    .carousel-scene {
+      width: 700px;
+      height: 700px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .carousel-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.06);
+      border: 2px solid var(--card-border);
+      transition: box-shadow 0.5s, opacity 0.5s;
+    }
+
+    .carousel-face img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: var(--bg2);
+    }
+
+    .carousel-face.active {
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2), 0 0 30px rgba(212, 175, 55, 0.1);
+    }
+
+    .carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--text2);
+      opacity: 0.35;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .carousel-dot.active {
+      opacity: 1;
+      background: var(--accent);
+      transform: scale(1.3);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .carousel-counter {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text2);
+    }
+
+    @media (max-width: 768px) {
+      .gallery-carousel {
+        height: 320px;
+      }
+
+      .carousel-scene {
+        width: 320px;
+        height: 220px;
+      }
     }
 
     footer {
@@ -1547,9 +1664,10 @@
             <strong>cloud infrastructure, DevOps pipelines, and agentic AI automation</strong>. I believe that great
             software isn't just functional; it's resilient, scalable, and beautifully orchestrated.
           </p>
-          <p>Currently undergoing intensive training in <strong>Agentic AI Platform Development</strong> at LinuxWorld
-            Informatics, I'm building systems that bridge generative AI with cloud-native infrastructure. When I'm not
-            deploying containers, I'm probably competing — and winning.</p>
+          <p>Having completed intensive training in <strong>Agentic AI Platform Development</strong> at LinuxWorld
+            Informatics, I'm now focused on building real-world projects that apply everything I've learned — from
+            cloud-native architectures to AI-powered automation. When I'm not deploying containers, I'm probably
+            competing — and winning.</p>
         </div>
         <div class="dark-only">
           <p>I am <strong>Shiwani Yaduka</strong> — System Architect, Cloud Engineer, and Infrastructure Strategist
@@ -1557,8 +1675,9 @@
           <p>My architecture philosophy: every system should survive chaos. I design <strong>fault-tolerant,
               auto-scaling cloud ecosystems</strong> using AWS, Kubernetes, and Jenkins-driven CI/CD pipelines. Every
             microservice I ship is containerized, monitored, and production-hardened.</p>
-          <p>Currently deploying <strong>agentic AI platforms</strong> that autonomously orchestrate multi-cloud
-            infrastructure. My systems don't just run — they adapt, self-heal, and scale without human intervention.</p>
+          <p>With <strong>Agentic AI Platform Development</strong> training complete, I'm now channelling that expertise
+            into building production-grade projects — from AI-driven automation to self-orchestrating cloud systems.
+            When I'm not deploying containers, I'm probably competing — and winning.</p>
         </div>
         <div class="about-tags">
           <span class="tag">AWS Learner</span><span class="tag">LinuxWorld Trainee</span>
@@ -1567,6 +1686,50 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section id="gallery">
+    <div class="section-header reveal"><span class="section-num">✦</span>
+      <h2 class="section-title">Garderner's Gallery</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="gallery-carousel reveal">
+      <div class="carousel-scene" id="carouselScene">
+        <div class="carousel-face active" data-index="0">
+          <img src="photos/gallery1.jpg" alt="Group photo at Summer School of Innovation" loading="lazy">
+        </div>
+        <div class="carousel-face" data-index="1">
+          <img src="photos/gallery2.jpg" alt="Presenting at Jazbaa - Summer School of Innovation" loading="lazy">
+        </div>
+        <div class="carousel-face" data-index="2">
+          <img src="photos/gallery3.jpg" alt="Team photo with mentors" loading="lazy">
+        </div>
+        <div class="carousel-face" data-index="3">
+          <img src="photos/gallery4.jpg" alt="Team celebration dinner" loading="lazy">
+        </div>
+        <div class="carousel-face" data-index="4">
+          <img src="photos/gallery5.jpg" alt="Workshop session" loading="lazy">
+        </div>
+        <div class="carousel-face" data-index="5">
+          <img src="photos/gallery6.jpg" alt="Group photo with awards" loading="lazy">
+        </div>
+        <div class="carousel-face" data-index="6">
+          <img src="photos/gallery7.jpg" alt="Award ceremony" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav reveal">
+      <div class="carousel-dots" id="carouselDots">
+        <button class="carousel-dot active" data-idx="0"></button>
+        <button class="carousel-dot" data-idx="1"></button>
+        <button class="carousel-dot" data-idx="2"></button>
+        <button class="carousel-dot" data-idx="3"></button>
+        <button class="carousel-dot" data-idx="4"></button>
+        <button class="carousel-dot" data-idx="5"></button>
+        <button class="carousel-dot" data-idx="6"></button>
+      </div>
+    </div>
+    <div class="carousel-counter reveal" id="carouselCounter">1 / 7</div>
   </section>
 
   <section id="skills">
@@ -1638,7 +1801,7 @@
         <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">Gradio</span><span
             class="stack-chip">AWS</span><span class="stack-chip">Docker</span><span
             class="stack-chip">Kubernetes</span><span class="stack-chip">OpenCV</span><span
-            class="stack-chip">Twilio</span></div><a href="https://github.com/Shiwani-Yaduka/Menu-Based-Remote-Tool"
+            class="stack-chip">Twilio</span></div><a href="https://github.com/Shiwani-Yaduka/Remote-SSH-Menu-Based"
           target="_blank" class="btn-github">↗ View on GitHub</a>
       </div>
       <div class="project-card reveal">
@@ -1650,7 +1813,7 @@
         <div class="project-stack"><span class="stack-chip">Jenkins</span><span class="stack-chip">Docker</span><span
             class="stack-chip">GitHub</span><span class="stack-chip">Flask</span><span
             class="stack-chip">Pytest</span><span class="stack-chip">Linux</span></div><a
-          href="https://github.com/Shiwani-Yaduka/CI-CD-Pipeline" target="_blank" class="btn-github">↗ View on
+          href="https://github.com/Shiwani-Yaduka/First_CI-CD" target="_blank" class="btn-github">↗ View on
           GitHub</a>
       </div>
       <div class="project-card reveal">
@@ -1662,7 +1825,8 @@
         <div class="project-stack"><span class="stack-chip">AWS EC2</span><span class="stack-chip">RDS</span><span
             class="stack-chip">Lambda</span><span class="stack-chip">SNS</span><span
             class="stack-chip">Python</span><span class="stack-chip">Flask</span><span class="stack-chip">MySQL</span>
-        </div><a href="https://github.com/Shiwani-Yaduka/Smart-Book-Tracker" target="_blank" class="btn-github">↗ View
+        </div><a href="https://github.com/Shiwani-Yaduka/SMART_BOOK_TRACKING-AWS" target="_blank" class="btn-github">↗
+          View
           on GitHub</a>
       </div>
       <div class="project-card reveal">
@@ -1673,8 +1837,29 @@
           persistence and MongoDB integration.</p>
         <div class="project-stack"><span class="stack-chip">C++</span><span class="stack-chip">OOPs</span><span
             class="stack-chip">STL</span><span class="stack-chip">MongoDB</span></div><a
-          href="https://github.com/Shiwani-Yaduka/User-Management" target="_blank" class="btn-github">↗ View on
+          href="https://github.com/Shiwani-Yaduka/User-Staff-Management-CPP" target="_blank" class="btn-github">↗ View
+          on
           GitHub</a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-num">PROJECT / 05</div>
+        <div class="project-name">VirtualHoney</div>
+        <p class="project-desc">An AI-powered chatbot trained on real WhatsApp conversations using Gemini Flash.
+          Replicates tone, emotional style, and personality for deeply personal and emotionally intelligent
+          conversations.</p>
+        <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">Gemini AI</span><span
+            class="stack-chip">JavaScript</span><span class="stack-chip">HTML/CSS</span></div><a
+          href="https://github.com/Shiwani-Yaduka/VirtualHoney" target="_blank" class="btn-github">↗ View on GitHub</a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-num">PROJECT / 06</div>
+        <div class="project-name">Confidex</div>
+        <p class="project-desc">An AI-powered confidence coach that analyzes live 15-second speaking sessions using
+          webcam, hand gesture detection, smile tracking, and voice pitch analysis to generate a real-time confidence
+          score and motivational feedback.</p>
+        <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">Streamlit</span><span
+            class="stack-chip">OpenCV</span><span class="stack-chip">AI/ML</span></div><a
+          href="https://github.com/Shiwani-Yaduka/Confidex" target="_blank" class="btn-github">↗ View on GitHub</a>
       </div>
     </div>
   </section>
@@ -1688,12 +1873,15 @@
       <div class="cred-card reveal">
         <div class="cred-issuer">NPTEL</div>
         <div class="cred-name">Introduction to Internet of Things</div><span class="cred-badge">Elite — Gold ·
-          93%</span><br><a href="#" class="cred-link">View Certificate ↗</a>
+          93%</span><br><a
+          href="https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs44/Course/NPTEL25CS44S44750109204372624.pdf"
+          target="_blank" class="cred-link">View Certificate ↗</a>
       </div>
       <div class="cred-card reveal">
         <div class="cred-issuer">Meta via Coursera</div>
         <div class="cred-name">Programming in Python</div><span class="cred-badge">Verified Certificate</span><br><a
-          href="#" class="cred-link">View Certificate ↗</a>
+          href="https://www.coursera.org/account/accomplishments/verify/V9XHEJP6BEJZ?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course"
+          target="_blank" class="cred-link">View Certificate ↗</a>
       </div>
       <div class="cred-card reveal">
         <div class="trophy-icon">🏆</div>
@@ -1779,24 +1967,15 @@
           <div class="dot dot-g"></div>
           <div class="terminal-title">shiwani@shinefolio — contact.sh</div>
         </div>
-        <div class="terminal-body">
-          <div class="t-line"><span class="t-prompt">~$</span> <span class="t-cmd">shiwani --info</span></div>
-          <div class="t-line"><span class="t-out">→ Email: shiwaniyaduka123@gmail.com</span></div>
-          <div class="t-line"><span class="t-out">→ GitHub: github.com/Shiwani-Yaduka</span></div>
-          <div class="t-line"><span class="t-out">→ LinkedIn: linkedin.com/in/shiwani12</span></div>
-          <div class="t-line" style="margin-top:.5rem;"><span class="t-prompt">~$</span> <span class="t-cmd">shiwani
-              --message</span></div>
-          <div class="t-line"><span class="t-out">// Opening contact form...</span></div>
-          <form class="contact-form" id="contactForm" onsubmit="sendEmail(event)">
-            <div class="form-group"><label class="form-label">// your_name</label><input type="text" class="form-input"
-                id="senderName" placeholder="Jane Smith" required></div>
-            <div class="form-group"><label class="form-label">// your_email</label><input type="email"
-                class="form-input" id="senderEmail" placeholder="jane@example.com" required></div>
-            <div class="form-group"><label class="form-label">// message</label><textarea class="form-textarea"
-                id="msgBody" placeholder="Hey Shiwani, I wanted to reach out about..." required></textarea></div>
-            <button type="submit" class="btn-send">Send Message ↗</button>
-            <div class="form-status" id="formStatus"></div>
-          </form>
+        <div class="terminal-body" id="terminalBody">
+          <div class="t-line"><span class="t-success">✦ Welcome to Shiwani's Terminal v2.0</span></div>
+          <div class="t-line"><span class="t-out"> Type </span><span class="t-cmd">shiwani --help</span><span
+              class="t-out"> to see available commands.</span></div>
+          <div class="t-line">&nbsp;</div>
+          <div class="terminal-input-line" id="terminalInputLine">
+            <span class="t-prompt">~$</span>
+            <input type="text" id="terminalInput" placeholder="type a command..." autocomplete="off" spellcheck="false">
+          </div>
         </div>
       </div>
     </div>
@@ -1864,19 +2043,238 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
-    function sendEmail(e) {
-      e.preventDefault();
-      const name = document.getElementById('senderName').value;
-      const email = document.getElementById('senderEmail').value;
-      const msg = document.getElementById('msgBody').value;
-      const subject = encodeURIComponent(`Message from ${name} via Shinefolio`);
-      const body = encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${msg}`);
-      const status = document.getElementById('formStatus');
-      window.location.href = `mailto:shiwaniyaduka123@gmail.com?subject=${subject}&body=${body}`;
-      status.style.display = 'block';
-      status.textContent = '✓ Opening your email client... message ready to send.';
-      setTimeout(() => { status.style.display = 'none'; }, 4000);
-    }
+    // ── 3D PHOTO CAROUSEL ─────────────────────────────────────────────────────
+    (function initCarousel() {
+      var scene = document.getElementById('carouselScene');
+      var faces = scene ? scene.querySelectorAll('.carousel-face') : [];
+      var dots = document.querySelectorAll('.carousel-dot');
+      var counter = document.getElementById('carouselCounter');
+      if (!scene || faces.length === 0) return;
+
+      var total = faces.length;
+      var current = 0;
+      var angle = 360 / total;
+      var radius = 700;
+      var autoTimer;
+
+      function positionFaces() {
+        for (var i = 0; i < faces.length; i++) {
+          var a = angle * i;
+          faces[i].style.transform = 'rotateY(' + a + 'deg) translateZ(' + radius + 'px)';
+        }
+      }
+
+      function goTo(idx) {
+        current = ((idx % total) + total) % total;
+        var rot = -angle * current;
+        scene.style.transform = 'rotateY(' + rot + 'deg)';
+        for (var i = 0; i < faces.length; i++) {
+          faces[i].classList.toggle('active', i === current);
+        }
+        for (var j = 0; j < dots.length; j++) {
+          dots[j].classList.toggle('active', j === current);
+        }
+        if (counter) counter.textContent = (current + 1) + ' / ' + total;
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      positionFaces();
+      goTo(0);
+
+      for (var d = 0; d < dots.length; d++) {
+        (function (idx) {
+          dots[idx].addEventListener('click', function () { goTo(idx); resetAuto(); });
+        })(d);
+      }
+
+      // Click to rotate
+      var startX = 0, dragging = false, didDrag = false;
+      scene.addEventListener('mousedown', function (e) { startX = e.clientX; dragging = true; didDrag = false; });
+      scene.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; dragging = true; didDrag = false; }, { passive: true });
+      window.addEventListener('mousemove', function (e) {
+        if (dragging && Math.abs(e.clientX - startX) > 10) didDrag = true;
+      });
+      window.addEventListener('mouseup', function (e) {
+        if (!dragging) return;
+        dragging = false;
+        var diff = e.clientX - startX;
+        if (Math.abs(diff) > 50) { diff < 0 ? next() : prev(); resetAuto(); didDrag = true; }
+      });
+      window.addEventListener('touchend', function (e) {
+        if (!dragging) return;
+        dragging = false;
+        var diff = e.changedTouches[0].clientX - startX;
+        if (Math.abs(diff) > 50) { diff < 0 ? next() : prev(); resetAuto(); didDrag = true; }
+      });
+      // Click (not drag) rotates to next
+      scene.addEventListener('click', function () {
+        if (!didDrag) { next(); resetAuto(); }
+      });
+
+      // Auto-rotate
+      function startAuto() { autoTimer = setInterval(next, 4000); }
+      function resetAuto() { clearInterval(autoTimer); startAuto(); }
+      startAuto();
+      scene.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+      scene.addEventListener('mouseleave', function () { startAuto(); });
+    })();
+
+    // ── INTERACTIVE TERMINAL ───────────────────────────────────────────────────
+    (function initTerminal() {
+      var termBody = document.getElementById('terminalBody');
+      var termInput = document.getElementById('terminalInput');
+      var termInputLine = document.getElementById('terminalInputLine');
+      if (!termBody || !termInput || !termInputLine) return;
+
+      var cmdHistory = [];
+      var historyIndex = -1;
+      var emailFlow = null;
+
+      function htmlEsc(str) {
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(str));
+        return d.innerHTML;
+      }
+
+      function addLine(html) {
+        var el = document.createElement('div');
+        el.className = 't-line fade-in';
+        el.innerHTML = html;
+        termBody.insertBefore(el, termInputLine);
+        termBody.scrollTop = termBody.scrollHeight;
+      }
+
+      function addLines(arr, delay) {
+        var d = delay || 50;
+        for (var i = 0; i < arr.length; i++) {
+          (function (idx) {
+            setTimeout(function () { addLine(arr[idx]); }, d * idx);
+          })(i);
+        }
+      }
+
+      function echo(raw) {
+        addLine('<span class="t-prompt">~$</span> <span class="t-cmd">' + htmlEsc(raw) + '</span>');
+      }
+
+      function cmdHelp() {
+        addLines([
+          '<span class="t-info">📋 Available Commands:</span>',
+          '<span class="t-out">  <span class="t-cmd">shiwani --help</span>      →  Show this help menu</span>',
+          '<span class="t-out">  <span class="t-cmd">shiwani --linkedin</span>  →  Open LinkedIn profile</span>',
+          '<span class="t-out">  <span class="t-cmd">shiwani --github</span>    →  Open GitHub profile</span>',
+          '<span class="t-out">  <span class="t-cmd">shiwani --email</span>     →  Send me an email</span>',
+          '<span class="t-out">  <span class="t-cmd">clear</span>               →  Clear the terminal</span>',
+        ], 60);
+      }
+
+      function cmdLinkedIn() {
+        addLines([
+          '<span class="t-success">✓ Redirecting to LinkedIn...</span>',
+          '<span class="t-out">→ <a href="https://www.linkedin.com/in/shiwani12" target="_blank" class="t-link">linkedin.com/in/shiwani12</a></span>',
+        ], 60);
+        setTimeout(function () { window.open('https://www.linkedin.com/in/shiwani12', '_blank'); }, 500);
+      }
+
+      function cmdGitHub() {
+        addLines([
+          '<span class="t-success">✓ Redirecting to GitHub...</span>',
+          '<span class="t-out">→ <a href="https://github.com/Shiwani-Yaduka" target="_blank" class="t-link">github.com/Shiwani-Yaduka</a></span>',
+        ], 60);
+        setTimeout(function () { window.open('https://github.com/Shiwani-Yaduka', '_blank'); }, 500);
+      }
+
+      function cmdEmailStart() {
+        emailFlow = { step: 'name', name: '', email: '', msg: '' };
+        addLines([
+          '<span class="t-info">✉️  Compose Email</span>',
+          '<span class="t-out">  Let\'s send a message to Shiwani.</span>',
+          '<span class="t-accent">→ Enter your name:</span>',
+        ], 60);
+        termInput.placeholder = 'Your name...';
+      }
+
+      function handleEmailInput(value) {
+        if (!emailFlow) return;
+        if (emailFlow.step === 'name') {
+          if (!value) { addLine('<span class="t-error">✗ Name cannot be empty.</span>'); return; }
+          emailFlow.name = value;
+          emailFlow.step = 'email';
+          echo(value);
+          addLine('<span class="t-accent">→ Enter your email address:</span>');
+          termInput.placeholder = 'you@example.com';
+        } else if (emailFlow.step === 'email') {
+          if (!value || value.indexOf('@') === -1) { addLine('<span class="t-error">✗ Please enter a valid email.</span>'); return; }
+          emailFlow.email = value;
+          emailFlow.step = 'msg';
+          echo(value);
+          addLine('<span class="t-accent">→ Type your message:</span>');
+          termInput.placeholder = 'Hey Shiwani, I wanted to say...';
+        } else if (emailFlow.step === 'msg') {
+          if (!value) { addLine('<span class="t-error">✗ Message cannot be empty.</span>'); return; }
+          echo(value);
+          var subj = encodeURIComponent('Message from ' + emailFlow.name + ' via Shinefolio');
+          var mailBody = encodeURIComponent('Name: ' + emailFlow.name + '\nEmail: ' + emailFlow.email + '\n\nMessage:\n' + value);
+          var mailto = 'mailto:shiwaniyaduka123@gmail.com?subject=' + subj + '&body=' + mailBody;
+          var preview = value.length > 50 ? value.substring(0, 50) + '...' : value;
+          addLines([
+            '<span class="t-success">✓ Opening mail client...</span>',
+            '<span class="t-out">→ From: ' + htmlEsc(emailFlow.name) + ' &lt;' + htmlEsc(emailFlow.email) + '&gt;</span>',
+            '<span class="t-out">→ Message: "' + htmlEsc(preview) + '"</span>',
+            '<span class="t-info">// Thank you, ' + htmlEsc(emailFlow.name) + '! 💚</span>',
+          ], 80);
+          setTimeout(function () { window.location.href = mailto; }, 800);
+          emailFlow = null;
+          termInput.placeholder = 'type a command...';
+        }
+      }
+
+      function clearTerminal() {
+        var lines = termBody.querySelectorAll('.t-line');
+        for (var i = 0; i < lines.length; i++) { lines[i].remove(); }
+        addLine('<span class="t-success">✦ Terminal cleared.</span>');
+      }
+
+      function processInput(raw) {
+        var trimmed = raw.trim();
+        if (!trimmed) return;
+        if (emailFlow) { handleEmailInput(trimmed); return; }
+        cmdHistory.unshift(raw);
+        historyIndex = -1;
+        echo(raw);
+        var cmd = trimmed.toLowerCase();
+        if (cmd === 'shiwani --help' || cmd === 'help') { cmdHelp(); }
+        else if (cmd === 'shiwani --linkedin') { cmdLinkedIn(); }
+        else if (cmd === 'shiwani --github') { cmdGitHub(); }
+        else if (cmd === 'shiwani --email') { cmdEmailStart(); }
+        else if (cmd === 'clear') { clearTerminal(); }
+        else {
+          addLines([
+            '<span class="t-error">✗ Command not found: ' + htmlEsc(cmd) + '</span>',
+            '<span class="t-out">  Type <span class="t-cmd">shiwani --help</span> for available commands.</span>',
+          ], 60);
+        }
+      }
+
+      termInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          processInput(termInput.value);
+          termInput.value = '';
+        } else if (e.key === 'ArrowUp' && !emailFlow) {
+          e.preventDefault();
+          if (historyIndex < cmdHistory.length - 1) { historyIndex++; termInput.value = cmdHistory[historyIndex]; }
+        } else if (e.key === 'ArrowDown' && !emailFlow) {
+          e.preventDefault();
+          if (historyIndex > 0) { historyIndex--; termInput.value = cmdHistory[historyIndex]; }
+          else { historyIndex = -1; termInput.value = ''; }
+        }
+      });
+
+      termBody.addEventListener('click', function () { termInput.focus(); });
+    })();
 
     const sects = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
@@ -1926,51 +2324,54 @@
   });
 
   // ── CURSOR ────────────────────────────────────────────────────────────────────
-  const dot = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  const canvas = document.getElementById('trail');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
+  (function initCursor() {
+    var dot2 = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    var canvas2 = document.getElementById('trail') || document.getElementById('cursor-trail');
+    if (!dot2 || !canvas2) return; // skip if elements missing
+    var ctx2 = canvas2.getContext('2d');
+    canvas2.width = window.innerWidth;
+    canvas2.height = window.innerHeight;
+    window.addEventListener('resize', function () {
+      canvas2.width = window.innerWidth;
+      canvas2.height = window.innerHeight;
+    });
 
-  let mx = -100, my = -100;
-  let rx = -100, ry = -100;
-  const particles = [];
+    var mx = -100, my = -100;
+    var rx = -100, ry = -100;
+    var pts = [];
 
-  document.addEventListener('mousemove', (e) => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-    particles.push({ x: mx, y: my, life: 1, r: 3 + Math.random() * 2 });
-  });
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      dot2.style.left = mx + 'px'; dot2.style.top = my + 'px';
+      pts.push({ x: mx, y: my, life: 1, r: 3 + Math.random() * 2 });
+    });
 
-  function lerp(a, b, t) { return a + (b - a) * t; }
+    function lerp(a, b, t) { return a + (b - a) * t; }
 
-  function animCursor() {
-    rx = lerp(rx, mx, 0.12);
-    ry = lerp(ry, my, 0.12);
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    function animCursor() {
+      rx = lerp(rx, mx, 0.12);
+      ry = lerp(ry, my, 0.12);
+      if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-      p.life -= 0.045;
-      p.r *= 0.97;
-      if (p.life <= 0) { particles.splice(i, 1); continue; }
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = isDark
-        ? `rgba(212,175,55,${p.life * 0.5})`
-        : `rgba(107,0,32,${p.life * 0.4})`;
-      ctx.fill();
+      ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+      for (var i = pts.length - 1; i >= 0; i--) {
+        var p = pts[i];
+        p.life -= 0.045;
+        p.r *= 0.97;
+        if (p.life <= 0) { pts.splice(i, 1); continue; }
+        var isDark = html.getAttribute('data-theme') === 'dark';
+        ctx2.beginPath();
+        ctx2.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx2.fillStyle = isDark
+          ? 'rgba(212,175,55,' + (p.life * 0.5) + ')'
+          : 'rgba(107,0,32,' + (p.life * 0.4) + ')';
+        ctx2.fill();
+      }
+      requestAnimationFrame(animCursor);
     }
-    requestAnimationFrame(animCursor);
-  }
-  animCursor();
+    animCursor();
+  })();
 
   // ── SCROLL REVEAL ─────────────────────────────────────────────────────────────
   const reveals = document.querySelectorAll('.reveal');
@@ -1983,31 +2384,178 @@
   }, { threshold: 0.12 });
   reveals.forEach(r => observer.observe(r));
 
-  // ── CONTACT FORM (mailto fallback) ───────────────────────────────────────────
-  function sendEmail(e) {
-    e.preventDefault();
-    const name = document.getElementById('senderName').value.trim();
-    const email = document.getElementById('senderEmail').value.trim();
-    const msg = document.getElementById('messageBody').value.trim();
-    const status = document.getElementById('form-status');
+  // ── INTERACTIVE TERMINAL ─────────────────────────────────────────────────────
+  (function initTerminal() {
+    var termBody = document.getElementById('terminalBody');
+    var termInput = document.getElementById('terminalInput');
+    var termInputLine = document.getElementById('terminalInputLine');
+    if (!termBody || !termInput || !termInputLine) return;
 
-    if (!name || !email || !msg) {
-      status.innerHTML = '<span class="t-error">✗ Error: all fields required.</span>';
-      return;
+    var cmdHistory = [];
+    var historyIndex = -1;
+    var emailFlow = null;
+
+    function htmlEscape(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
     }
 
-    const subject = encodeURIComponent(`Message from ${name} via Shinefolio`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
-    const mailto = `mailto:shiwaniyaduka123@gmail.com?subject=${subject}&body=${body}`;
+    function appendLine(html) {
+      var el = document.createElement('div');
+      el.className = 't-line fade-in';
+      el.innerHTML = html;
+      termBody.insertBefore(el, termInputLine);
+      termBody.scrollTop = termBody.scrollHeight;
+    }
 
-    status.innerHTML = '<span class="t-success">✓ Opening mail client...</span>';
-    window.location.href = mailto;
+    function appendLines(linesArr, delay) {
+      var d = delay || 50;
+      for (var i = 0; i < linesArr.length; i++) {
+        (function (idx) {
+          setTimeout(function () {
+            appendLine(linesArr[idx]);
+          }, d * idx);
+        })(i);
+      }
+    }
 
-    setTimeout(() => {
-      status.innerHTML = '<span class="t-info">// Message queued. Thank you, ' + name + '!</span>';
-      document.getElementById('contactForm').reset();
-    }, 1500);
-  }
+    function echoCommand(raw) {
+      appendLine('<span class="t-prompt">~$</span> <span class="t-cmd">' + htmlEscape(raw) + '</span>');
+    }
+
+    function cmdHelp() {
+      appendLines([
+        '<span class="t-info">📋 Available Commands:</span>',
+        '<span class="t-out">  <span class="t-cmd">shiwani --help</span>      →  Show this help menu</span>',
+        '<span class="t-out">  <span class="t-cmd">shiwani --linkedin</span>  →  Open LinkedIn profile</span>',
+        '<span class="t-out">  <span class="t-cmd">shiwani --github</span>    →  Open GitHub profile</span>',
+        '<span class="t-out">  <span class="t-cmd">shiwani --email</span>     →  Send me an email</span>',
+        '<span class="t-out">  <span class="t-cmd">clear</span>               →  Clear the terminal</span>',
+      ], 60);
+    }
+
+    function cmdLinkedIn() {
+      appendLines([
+        '<span class="t-success">✓ Redirecting to LinkedIn...</span>',
+        '<span class="t-out">→ <a href="https://www.linkedin.com/in/shiwani12" target="_blank" class="t-link">linkedin.com/in/shiwani12</a></span>',
+      ], 60);
+      setTimeout(function () { window.open('https://www.linkedin.com/in/shiwani12', '_blank'); }, 500);
+    }
+
+    function cmdGitHub() {
+      appendLines([
+        '<span class="t-success">✓ Redirecting to GitHub...</span>',
+        '<span class="t-out">→ <a href="https://github.com/Shiwani-Yaduka" target="_blank" class="t-link">github.com/Shiwani-Yaduka</a></span>',
+      ], 60);
+      setTimeout(function () { window.open('https://github.com/Shiwani-Yaduka', '_blank'); }, 500);
+    }
+
+    function cmdEmailStart() {
+      emailFlow = { step: 'name', name: '', email: '', msg: '' };
+      appendLines([
+        '<span class="t-info">✉️  Compose Email</span>',
+        '<span class="t-out">  Let\'s send a message to Shiwani.</span>',
+        '<span class="t-accent">→ Enter your name:</span>',
+      ], 60);
+      termInput.placeholder = 'Your name...';
+    }
+
+    function handleEmailInput(value) {
+      if (!emailFlow) return;
+
+      if (emailFlow.step === 'name') {
+        if (!value) { appendLine('<span class="t-error">✗ Name cannot be empty.</span>'); return; }
+        emailFlow.name = value;
+        emailFlow.step = 'email';
+        echoCommand(value);
+        appendLine('<span class="t-accent">→ Enter your email address:</span>');
+        termInput.placeholder = 'you@example.com';
+      } else if (emailFlow.step === 'email') {
+        if (!value || value.indexOf('@') === -1) { appendLine('<span class="t-error">✗ Please enter a valid email address.</span>'); return; }
+        emailFlow.email = value;
+        emailFlow.step = 'msg';
+        echoCommand(value);
+        appendLine('<span class="t-accent">→ Type your message:</span>');
+        termInput.placeholder = 'Hey Shiwani, I wanted to say...';
+      } else if (emailFlow.step === 'msg') {
+        if (!value) { appendLine('<span class="t-error">✗ Message cannot be empty.</span>'); return; }
+        echoCommand(value);
+        var subj = encodeURIComponent('Message from ' + emailFlow.name + ' via Shinefolio');
+        var mailBody = encodeURIComponent('Name: ' + emailFlow.name + '\nEmail: ' + emailFlow.email + '\n\nMessage:\n' + value);
+        var mailto = 'mailto:shiwaniyaduka123@gmail.com?subject=' + subj + '&body=' + mailBody;
+        var preview = value.length > 50 ? value.substring(0, 50) + '...' : value;
+        appendLines([
+          '<span class="t-success">✓ Opening mail client...</span>',
+          '<span class="t-out">→ From: ' + htmlEscape(emailFlow.name) + ' &lt;' + htmlEscape(emailFlow.email) + '&gt;</span>',
+          '<span class="t-out">→ Message: "' + htmlEscape(preview) + '"</span>',
+          '<span class="t-info">// Thank you, ' + htmlEscape(emailFlow.name) + '! 💚</span>',
+        ], 80);
+        setTimeout(function () { window.location.href = mailto; }, 800);
+        emailFlow = null;
+        termInput.placeholder = 'type a command...';
+      }
+    }
+
+    function clearTerminal() {
+      var lines = termBody.querySelectorAll('.t-line');
+      for (var i = 0; i < lines.length; i++) { lines[i].remove(); }
+      appendLine('<span class="t-success">✦ Terminal cleared.</span>');
+    }
+
+    function processInput(raw) {
+      var trimmed = raw.trim();
+      if (!trimmed) return;
+
+      if (emailFlow) {
+        handleEmailInput(trimmed);
+        return;
+      }
+
+      cmdHistory.unshift(raw);
+      historyIndex = -1;
+      echoCommand(raw);
+
+      var cmd = trimmed.toLowerCase();
+      if (cmd === 'shiwani --help' || cmd === 'help') { cmdHelp(); }
+      else if (cmd === 'shiwani --linkedin') { cmdLinkedIn(); }
+      else if (cmd === 'shiwani --github') { cmdGitHub(); }
+      else if (cmd === 'shiwani --email') { cmdEmailStart(); }
+      else if (cmd === 'clear') { clearTerminal(); }
+      else {
+        appendLines([
+          '<span class="t-error">✗ Command not found: ' + htmlEscape(cmd) + '</span>',
+          '<span class="t-out">  Type <span class="t-cmd">shiwani --help</span> for available commands.</span>',
+        ], 60);
+      }
+    }
+
+    termInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        processInput(termInput.value);
+        termInput.value = '';
+      } else if (e.key === 'ArrowUp' && !emailFlow) {
+        e.preventDefault();
+        if (historyIndex < cmdHistory.length - 1) {
+          historyIndex++;
+          termInput.value = cmdHistory[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown' && !emailFlow) {
+        e.preventDefault();
+        if (historyIndex > 0) {
+          historyIndex--;
+          termInput.value = cmdHistory[historyIndex];
+        } else {
+          historyIndex = -1;
+          termInput.value = '';
+        }
+      }
+    });
+
+    // Click anywhere in terminal body to focus the input
+    termBody.addEventListener('click', function () { termInput.focus(); });
+  })();
 
   // ── NAV SHRINK ON SCROLL ──────────────────────────────────────────────────────
   window.addEventListener('scroll', () => {
