@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Terminal Demo - Shiwani's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="terminal.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'DM Mono', monospace;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+    }
+    
+    .demo-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .demo-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #FF5F57, #00FF41);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .demo-header p {
+      color: #888;
+      font-size: 1rem;
+    }
+    
+    .terminal-container-wrapper {
+      width: 100%;
+      max-width: 900px;
+    }
+    
+    .demo-footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .demo-footer a {
+      color: #00FF41;
+      text-decoration: none;
+    }
+    
+    .demo-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .hint {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 65, 0.2);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: #00FF41;
+    }
+    
+    .hint strong {
+      color: #FF5F57;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-header">
+    <h1>Interactive Terminal</h1>
+    <p>Shiwani's Portfolio - Linux Command Interface</p>
+  </div>
+
+  <div class="terminal-container-wrapper">
+    <div id="terminal-container"></div>
+    
+    <div class="hint">
+      <strong>Quick Start:</strong> Type <code>help</code> to see all available commands. 
+      Try <code>about</code>, <code>skills</code>, <code>projects</code>, or <code>neofetch</code>!
+    </div>
+  </div>
+
+  <div class="demo-footer">
+    <p>Made with love by Shiwani Yaduka</p>
+    <p>
+      <a href="https://github.com/Shiwani-Yaduka" target="_blank">GitHub</a> • 
+      <a href="https://www.linkedin.com/in/shiwani12" target="_blank">LinkedIn</a> • 
+      <a href="mailto:shiwaniyaduka123@gmail.com">Email</a>
+    </p>
+  </div>
+
+  <script src="commands.js"></script>
+  <script src="terminal.js"></script>
+</body>
+</html>
